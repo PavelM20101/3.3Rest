@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -31,22 +32,26 @@ public class User implements UserDetails {
     private int id;
 
     @Column(name = "username")
-    @NotBlank(message = "Username should not be empty")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+//    @NotBlank(message = "Username should not be empty")
+//    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String username;
     @Column(name = "password")
-    @NotBlank(message = "Password should not be empty")
-    @Size(min = 2, message = "Password should be more than 2 characters")
+//    @NotBlank(message = "Password should not be empty")
+//    @Size(min = 2, message = "Password should be more than 2 characters")
     private String password;
     @Transient
     private String passwordConfirm;
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},fetch = FetchType.EAGER)
-    @JoinColumn(name = "roles_id")
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Set<Role> roles;
 
     @Column(name = "email")
-    @NotBlank(message = "Поле не должно быть пустым")
-    @Email(message = "Email should be valid")
+//    @NotBlank(message = "Поле не должно быть пустым")
+//    @Email(message = "Email should be valid")
     private String email;
 
     @Override

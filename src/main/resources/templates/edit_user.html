@@ -2,37 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Изменить пользователя</title>
+    <title>Update user</title>
 </head>
 <body>
-<h2>Изменить пользователя</h2>
+<h2>Update user</h2>
 <div>
 
     <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Выйти">
+        <input type="submit" value="Logout">
     </form>
     <br/>
     <form th:method="PATCH" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}" th:object="${user}">
         <fieldset>
-            <legend>Данные пользователя</legend>
+            <legend>User info</legend>
             <p>
-                <label th:for="name">Имя</label>
-                <input type="text" name="name" th:id="name" th:value="${user.getName()}">
+                <label th:for="name">Name</label>
+                <input type="text" name="name" th:id="name" th:value="${user.getUsername()}">
             </p>
             <p>
-                <label th:for="lastName">Фамилия</label>
-                <input type="text" name="lastName" th:id="lastName" th:value="${user.getLastName()}"><br/>
-            </p>
-            <p>
-                <label th:for="age">Возраст</label>
-                <input type="number" name="age" th:id="age" th:value="${user.getAge()}"><br/>
-            </p>
-            <p>
-                <label th:for="email">Электронная почта</label>
+                <label th:for="email">Email</label>
                 <input type="text" name="email" th:id="email" th:value="${user.getEmail()}"><br/>
             </p>
             <p>
-                <label th:for="password">Пароль</label>
+                <label th:for="password">Password</label>
                 <input type="password" name="password" th:id="password"><br/>
             </p>
             <p>
@@ -45,12 +37,12 @@
                 </label>
             </p>
         </fieldset>
-        <button style="background: lightgray" type="submit">Изменить данные</button>
+        <button style="background: lightgray" type="submit">Update</button>
     </form>
 
     <br/>
     <form th:action="@{/admin/users}">
-        <button style="background: lightgray" type="submit">Назад к списку пользователей</button>
+        <button style="background: lightgray" type="submit">Back</button>
     </form>
 </div>
 </body>

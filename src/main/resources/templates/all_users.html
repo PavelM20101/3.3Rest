@@ -4,51 +4,47 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Админ. Все пользователи</title>
+    <title>All users</title>
 </head>
 <body>
-<h2>Привет, Админ. Вот, все пользователи:</h2>
+<h2>Users:</h2>
 <div>
 
     <hr/>
     <table>
         <tr>
             <th>Id</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Возраст</th>
-            <th>Электронная почта</th>
+            <th>Username</th>
+            <th>Email</th>
             <th>Роль</th>
         </tr>
 
         <tr th:each="user : ${userSet}">
             <td th:text="${user.getId()}">Id</td>
-            <td th:text="${user.getName()}">Имя</td>
-            <td th:text="${user.getLastName()}">Фамилия</td>
-            <td th:text="${user.getAge()}">Возраст</td>
-            <td th:text="${user.getEmail()}">Электронная почта</td>
-            <td th:text="${user.getRoles()}">Роль</td>
+            <td th:text="${user.getUsername()}">Name</td>
+            <td th:text="${user.getEmail()}">Email</td>
+            <td th:text="${user.getRoles()}">Role</td>
 
             <td>
                 <form th:action="@{/admin/users/{id}/edit(id=${user.id})}" th:object="${user}">
-                    <button style="background: mintcream" type="submit">Изменить</button>
+                    <button style="background: mintcream" type="submit">Update</button>
                 </form>
             </td>
             <td>
                 <form th:method="DELETE" th:action="@{/admin/users/{id}/delete(id=${user.id})}">
                     <input type="hidden" name="id" th:value="${user.id}">
-                    <button style="background: moccasin" type="submit" value="Delete">Удалить</button>
+                    <button style="background: moccasin" type="submit" value="Delete">Delete</button>
                 </form>
             </td>
         </tr>
     </table>
     <br>
     <form th:action="@{/admin/users/add}">
-        <button style="background: lightgray" type="submit">Добавить нового пользователя</button>
+        <button style="background: lightgray" type="submit">Add new user</button>
     </form>
     <br>
     <form th:action="@{/logout}" method="post">
-        <input style="background: lightgray" type="submit" value="Выйти">
+        <input style="background: lightgray" type="submit" value="Logout">
     </form>
 </div>
 

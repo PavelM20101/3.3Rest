@@ -16,14 +16,14 @@ public class RoleDAOImpl implements RoleDAO{
 
     @Override
     public Set<Role> getAllRoles() {
-        List<Role> roleList = entityManager.createQuery("select r from Role r ", Role.class).getResultList();
+        List<Role> roleList = entityManager.createQuery("from Role", Role.class).getResultList();
         return new HashSet<>(roleList);
     }
 
     @Override
     public Role getRoleByName(String role) {
         return entityManager.createQuery(
-                "SELECT r from Role r where r.role=:role", Role.class
+                "from Role where Role.name=:role", Role.class
         ).setParameter("role", role).getSingleResult();
     }
 

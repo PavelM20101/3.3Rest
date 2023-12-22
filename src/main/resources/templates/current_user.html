@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User</title>
-    <h2>Привет, друг! Ниже информация о тебе:</h2>
+    <h2>Info:</h2>
 </head>
 <body>
 
@@ -11,18 +11,16 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Электронная почта</th>
+        <th>Username</th>
+        <th>Email</th>
     </tr>
 
     </thead>
     <tbody>
     <tr>
-        <td th:utext="${user.getId()}">id</td>
-        <td th:utext="${user.getName()}">Имя</td>
-        <td th:utext="${user.getLastName()}">Фамилия</td>
-        <td th:utext="${user.getEmail()}">Электронная почта</td>
+        <td th:utext="${user.getId()}">Id</td>
+        <td th:utext="${user.getUsername()}">Nmae</td>
+        <td th:utext="${user.getEmail()}">Email</td>
     </tr>
     </tbody>
 </table>

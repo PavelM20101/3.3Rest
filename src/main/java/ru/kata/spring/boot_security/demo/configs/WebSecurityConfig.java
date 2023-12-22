@@ -9,27 +9,30 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final SuccessUserHandler successUserHandler;
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    private SuccessUserHandler successUserHandler;
+
+
+
+
+
 
     // SuccessHandler это обработчик успешной аутентификации
     // UserDetails - минимальная информация о пользователях (логин, пароль и тд)
 
-    @Autowired
-    public WebSecurityConfig(SuccessUserHandler successUserHandler
-            , @Qualifier("userServiceImpl") UserDetailsService userDetailsService) {
-        this.successUserHandler = successUserHandler;
-        this.userDetailsService = userDetailsService;
-    }
+//    @Autowired
+//    public WebSecurityConfig(SuccessUserHandler successUserHandler
+//            , @Qualifier("userServiceImpl") UserDetailsService userDetailsService) {
+//        this.successUserHandler = successUserHandler;
+//        this.userDetailsService = userDetailsService;
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -37,18 +40,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    protected BCryptPasswordEncoder bCryptPasswordEncoder() { // энкодер паролей
-
+    protected BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
 
     @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider() {
-        // сверяет userDetailsService с поступившим юзером
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
         return daoAuthenticationProvider;
+    }
+    @Bean
+    @Qualifier("userServiceImpl")
+    public UserDetailsService userDetailsService() {
+        return new UserServiceImpl();
     }
 
     @Override

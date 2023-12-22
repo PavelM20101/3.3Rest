@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Добавить пользователя</title>
+    <title>Add user</title>
 </head>
 <body>
-<h2>Добавить пользователя</h2>
+<h2>Add user</h2>
 <div>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Выйти">
@@ -15,13 +15,7 @@
         <fieldset>
             <legend>Данные пользователя</legend>
             <label for="name">Enter name</label>
-            <input type="text" th:field="*{name}" id="name"/>
-            </p>
-            <label for="lastName">Last name</label>
-            <input type="text" th:field="*{lastName}" id="lastName"/>
-            </p>
-            <label for="age">Age</label>
-            <input type="number" th:field="*{age}" id="age"/>
+            <input type="text" th:field="*{username}" id="name"/>
             </p>
             <label for="email">Email</label>
             <input type="text" th:field="*{email}" id="email"/>
@@ -39,12 +33,11 @@
             </p>
         </fieldset>
         <br/>
-        <button style="background: lightgray" type="submit">Сохранить пользователя</button>
+        <button style="background: lightgray" type="submit">Save user</button>
     </form>
     <br/>
     <form th:action="@{/admin}">
-        <button style="background: lightgray" type="submit" class="btn btn-outline-danger">Назад к списку
-            пользователей
+        <button style="background: lightgray" type="submit" class="btn btn-outline-danger">Back
         </button>
     </form>
 </div>
