@@ -21,8 +21,8 @@ public class Role implements GrantedAuthority {
     private int id;
     @Column(name = "name_role")
     private String name;
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},mappedBy = "roles")
-    private Set<User> users;
+//    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},mappedBy = "roles")
+//    private Set<User> users;
 
     @Override
     public String getAuthority() {
@@ -31,6 +31,10 @@ public class Role implements GrantedAuthority {
 
     public Role(int id) {
         this.id = id;
+    }
+
+    public Role(String name) {
+        this.name = name;
     }
 
     public Role(int id, String name) {
@@ -57,7 +61,11 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-//    public Set<User> getUsers() {
+    @Override
+    public String toString() {
+        return "" + name + '\'';
+    }
+    //    public Set<User> getUsers() {
 //        return users;
 //    }
 //

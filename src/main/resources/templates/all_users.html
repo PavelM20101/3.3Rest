@@ -31,11 +31,12 @@
                 </form>
             </td>
             <td>
-                <form th:method="DELETE" th:action="@{/admin/users/{id}/delete(id=${user.id})}">
+                <form th:method="delete" th:action="@{/admin/users/{id}/delete(id=${user.id})}">
                     <input type="hidden" name="id" th:value="${user.id}">
                     <button style="background: moccasin" type="submit" value="Delete">Delete</button>
                 </form>
             </td>
+
         </tr>
     </table>
     <br>

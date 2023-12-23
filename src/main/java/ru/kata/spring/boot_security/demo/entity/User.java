@@ -16,9 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -32,12 +29,8 @@ public class User implements UserDetails {
     private int id;
 
     @Column(name = "username")
-//    @NotBlank(message = "Username should not be empty")
-//    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String username;
     @Column(name = "password")
-//    @NotBlank(message = "Password should not be empty")
-//    @Size(min = 2, message = "Password should be more than 2 characters")
     private String password;
     @Transient
     private String passwordConfirm;
@@ -50,10 +43,21 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     @Column(name = "email")
-//    @NotBlank(message = "Поле не должно быть пустым")
-//    @Email(message = "Email should be valid")
     private String email;
-
+    //------------------------
+//    public void addRole(Role role) {
+//        if (roles == null) {
+//            roles = new HashSet<>();
+//        }
+//        roles.add(role);
+//    }
+//
+//    public void removeRole(Role role) {
+//        if (roles != null) {
+//            roles.remove(role);
+//        }
+//    }
+    //-----------------------
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
