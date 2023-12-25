@@ -4,39 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Info</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<h2>Employee info</h2>
-<br>
-<form th:action="@{/admin/saveUser}" th:object="${user}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-
-    <label for="username">Name</label>
-    <input type="text" th:field="*{username}"/>
-    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
+<div class="container mt-5">
+    <h2>Employee info</h2>
     <br>
+    <form th:action="@{/admin/saveUser}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}"/>
 
-    <label for="password">Password</label>
-    <input type="text" th:field="*{password}"/>
-    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Lastname error</div>
-    <br>
+        <div class="form-group">
+            <label for="username">Name</label>
+            <input type="text" class="form-control" th:field="*{username}"/>
+            <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
+        </div>
 
-    <label for="email">Email</label>
-    <input type="text" th:field="*{email}"/>
-    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
-    <br>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="text" class="form-control" th:field="*{password}"/>
+            <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
+        </div>
 
-    <label>
-        <select name="role" id="role">
-            <option disabled>Choose a role:</option>
-            <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"></option>
-        </select>
-    </label>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" th:field="*{email}"/>
+            <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+        </div>
 
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select class="form-control" name="role" id="role">
+                <option disabled>Choose a role:</option>
+                <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"></option>
+            </select>
+        </div>
 
-    <br>
+        <button type="submit" class="btn btn-primary">OK</button>
+    </form>
+</div>
 
-    <input type="submit" value="OK">
-</form>
+<!-- Подключение Bootstrap JS (необязательно, но может потребоваться для некоторых компонентов) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

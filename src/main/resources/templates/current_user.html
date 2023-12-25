@@ -2,31 +2,42 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
-    <h2>Info:</h2>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Info</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 
-<table border="2">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Email</th>
-    </tr>
+<div class="container mt-5">
+    <h2>User Info:</h2>
 
-    </thead>
-    <tbody>
-    <tr>
-        <td th:utext="${user.getId()}">Id</td>
-        <td th:utext="${user.getUsername()}">Nmae</td>
-        <td th:utext="${user.getEmail()}">Email</td>
-    </tr>
-    </tbody>
-</table>
-<br>
-<form th:action="@{'/logout'}">
-    <input type="submit" value="Logout"/>
-</form>
+    <table class="table table-bordered mt-3">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:utext="${user.getId()}">Id</td>
+            <td th:utext="${user.getUsername()}">Name</td>
+            <td th:utext="${user.getEmail()}">Email</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <form th:action="@{'/logout'}" method="post">
+        <button type="submit" class="btn btn-primary">Logout</button>
+    </form>
+</div>
+
+<!-- Подключение Bootstrap JS (необязательно, но может потребоваться для некоторых компонентов) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

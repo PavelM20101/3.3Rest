@@ -15,10 +15,20 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
-    @Autowired
+
     private UserDAO userDao;
-    @Autowired
+
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    public void setUserDao(UserDAO userDao) {
+        this.userDao = userDao;
+    }
+
+    @Autowired
+    public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
