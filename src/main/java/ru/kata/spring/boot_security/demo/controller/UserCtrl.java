@@ -23,7 +23,7 @@ public class UserCtrl {
 
     @GetMapping
     public String userInfo(Principal principal, Model model) {
-        User user = userService.getUserByEmail(principal.getName());
+        User user = userService.getUserByUsername(principal.getName());
         model.addAttribute("user", user);
         return "current_user";
     }

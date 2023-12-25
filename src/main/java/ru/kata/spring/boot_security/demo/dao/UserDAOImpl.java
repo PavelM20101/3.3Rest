@@ -2,16 +2,14 @@ package ru.kata.spring.boot_security.demo.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Set;
 
 @Repository
-public class UserDAOImpl implements UserDAO{
+public class UserDAOImpl implements UserDAO {
     @PersistenceContext
     private final EntityManager entityManager;
 
@@ -34,31 +32,34 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void addUser(User user) {
-        entityManager.persist(user);
+    public void deleteUser(int id) {
+        User user = this.getUser(id);
+        if (user == null) {
+            throw new NullPointerException();
+        }
+        entityManager.remove(user);
+        entityManager.flush();
     }
 
     @Override
-    public User getUserById(int id) {
-
+    public User getUser(int id) {
         return entityManager.find(User.class, id);
     }
 
     @Override
     public void updateUser(User user) {
-
         entityManager.merge(user);
+        entityManager.flush();
     }
 
     @Override
-    public void removeUserById(int id) {
-
-        entityManager.remove(entityManager.find(User.class, id));
+    public void createUser(User user) {
+        entityManager.persist(user);
+        entityManager.flush();
     }
 
     @Override
-    public List<User> listUsers() {
-
-        return entityManager.createQuery("From User", User.class).getResultList();
+    public List<User> getAllUsers() {
+        return entityManager.createQuery("from User", User.class).getResultList();
     }
 }

@@ -21,56 +21,52 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userDao.getUserByUsername(username);
+    }
+
+    @Override
     public User getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
     }
 
-    //    @Autowired
-//    public UserServiceImpl(UserDAO userDao, BCryptPasswordEncoder bCryptPasswordEncoder) {
-//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-//        this.userDao = userDao;
-//    }
-    //Transactional(readOnly = true)
-    @Transactional(readOnly = true)
+    @Override
     public User getUserByEmail(String email) {
-
         return userDao.getUserByEmail(email);
     }
-    @Override
-    public void addUser(User user) {
-        userDao.addUser(user);
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    }
-    @Transactional(readOnly = true)
-    public User getUserById(int id) {
 
-        return userDao.getUserById(id);
+    @Override
+    public void deleteUser(int id) {
+        userDao.deleteUser(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
+    public User getUser(int id) {
+        return userDao.getUser(id);
+    }
+
+    @Override
     public void updateUser(User user) {
-
         userDao.updateUser(user);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public void removeUserById(int id) {
-
-        userDao.removeUserById(id);
+    public void createUser(User user) {
+        userDao.createUser(user);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<User> listUsers() {
-
-        return userDao.listUsers();
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
     }
 
-    @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userDao.getUserByUsername(username);
+    @Override
+    public void createOrUpdateUser(User user) {
+        if (user.getId() == 0) {
+            this.createUser(user);
+        } else {
+            this.updateUser(user);
+        }
     }
 }

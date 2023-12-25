@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Info</title>
+</head>
+<body>
+<h2>Employee info</h2>
+<br>
+<form th:action="@{/admin/saveUser}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label for="username">Name</label>
+    <input type="text" th:field="*{username}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
+    <br>
+
+    <label for="password">Password</label>
+    <input type="text" th:field="*{password}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Lastname error</div>
+    <br>
+
+    <label for="email">Email</label>
+    <input type="text" th:field="*{email}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <br>
+
+    <label>
+        <select name="role" id="role">
+            <option disabled>Choose a role:</option>
+            <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"></option>
+        </select>
+    </label>
+
+
+    <br>
+
+    <input type="submit" value="OK">
+</form>
+</body>
+</html>

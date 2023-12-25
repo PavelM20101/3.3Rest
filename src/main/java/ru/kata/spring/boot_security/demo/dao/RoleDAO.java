@@ -5,15 +5,8 @@ import ru.kata.spring.boot_security.demo.entity.Role;
 import java.util.Set;
 
 public interface RoleDAO {
-    public Set<Role> getAllRoles();
+    Set<Role> getAllRoles();
 
-    public Role getRoleByName(String name);
+    Role getRoleByName(String name);
 
-    public Set<Role> getSetOfRoles(String[] roleNames);
-
-    public void add(Role role);
-
-    public void edit(Role role);
-
-    public Role getById(int id);
 }
