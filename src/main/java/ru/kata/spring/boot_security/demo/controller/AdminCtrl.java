@@ -15,7 +15,9 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -48,14 +50,24 @@ public class AdminCtrl {
         return "user-info";
     }
 
-    @PostMapping("saveUser")
-    public String saveUser(@ModelAttribute("user") User user, @RequestParam("role") String roleName) {
-        Role role = roleService.getRoleByName(roleName);
-        Set<Role> roles = new HashSet<>(Collections.singletonList(role));
-        user.setRoles(roles);
-        userService.createOrUpdateUser(user);
-        return "redirect:/admin/users";
-    }
+//    @PostMapping("saveUser")
+//    public String saveUser(@ModelAttribute("user") User user, @RequestParam("role") String roleName) {
+//        Role role = roleService.getRoleByName(roleName);
+//        Set<Role> roles = new HashSet<>(Collections.singletonList(role));
+//        user.setRoles(roles);
+//        userService.createOrUpdateUser(user);
+//        return "redirect:/admin/users";
+//    }
+@PostMapping("saveUser")
+public String saveUser(@ModelAttribute("user") User user, @RequestParam("roles") List<String> roleNames) {
+    Set<Role> roles = roleNames.stream()
+            .map(roleService::getRoleByName)
+            .collect(Collectors.toSet());
+
+    user.setRoles(roles);
+    userService.createOrUpdateUser(user);
+    return "redirect:/admin/users";
+}
 
     @GetMapping("updateUser")
     public String updateUser(@RequestParam("userId") int id, Model model) {
