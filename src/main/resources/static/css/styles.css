@@ -1,42 +1,53 @@
+/* Определяем цвет фона для всего контента внутри <body> */
 body {
     background-color: #eee;
 }
 
+/* Стили для формы входа пользователя или регистрации */
 .form-signin {
-    max-width: 330px;
-    padding: 15px;
-    margin: 40px auto;
-}
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-    margin-bottom: 10px;
-}
-.form-signin .checkbox {
-    font-weight: 400;
-}
-.form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
-}
-.form-signin .form-control:focus {
-    z-index: 2;
-}
-.form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    max-width: 330px; /* Максимальная ширина формы */
+    padding: 15px; /* Отступы вокруг содержимого формы */
+    margin: 40px auto; /* Центрирование формы по горизонтали */
 }
 
-.modal-body label, .form-group label {
-    margin-top: 12px;
-    margin-bottom: 4px;
-    font-weight: bold;
+/* Стили для текстового заголовка формы и чекбокса */
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px; /* Отступ снизу */
+}
+
+/* Стили для чекбокса */
+.form-signin .checkbox {
+    font-weight: 400; /* Нормальный вес текста */
+}
+
+/* Общие стили для элементов формы */
+.form-signin .form-control {
+    position: relative; /* Позиционирование относительно своего потока */
+    box-sizing: border-box; /* Учитываем рамки и отступы в размерах элемента */
+    height: auto; /* Высота элемента подстраивается под контент */
+    padding: 10px; /* Внутренние отступы */
+    font-size: 16px; /* Размер шрифта */
+}
+
+/* Стили для элемента ввода типа email */
+.form-signin input[type="email"] {
+    margin-bottom: -1px; /* Убираем нижний отступ */
+    border-bottom-right-radius: 0; /* Убираем закругление углов */
+    border-bottom-left-radius: 0; /* Убираем закругление углов */
+}
+
+/* Стили для элемента ввода типа password */
+.form-signin input[type="password"] {
+    margin-bottom: 10px; /* Отступ снизу */
+    border-top-left-radius: 0; /* Убираем закругление углов */
+    border-top-right-radius: 0; /* Убираем закругление углов */
+}
+
+/* Стили для меток внутри модального окна и групп форм */
+.modal-body label,
+.form-group label {
+    margin-top: 12px; /* Отступ сверху */
+    margin-bottom: 4px; /* Отступ снизу */
+    font-weight: bold; /* Полужирный текст */
 }
