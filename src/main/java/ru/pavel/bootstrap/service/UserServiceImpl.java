@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
@@ -34,11 +35,13 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
+    @Transactional
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
 
     @Override
+    @Transactional
     public void updateUser(User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         bindingResult = checkBindingResultForPasswordField(bindingResult);
         if (!bindingResult.hasErrors()) {
@@ -59,6 +62,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public void insertUser(User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (!bindingResult.hasErrors()) {
             String oldPassword = user.getPassword();
