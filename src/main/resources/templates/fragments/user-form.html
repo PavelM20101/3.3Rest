@@ -33,9 +33,47 @@
                                  th:text="${error.getDefaultMessage()}"/>
                         </th:block>
                     </div>
+                    <div>
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" th:field="*{lastName}" id="lastName">
+                    </div>
+                    <div>
+                        <label for="age">Age</label>
+                        <input type="number" class="form-control"
+                               th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('age')} ? 'is-invalid'"
+                               th:field="*{age}" id="age">
+                        <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('age')}">
+                            <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('age')}"
+                                 th:text="${error.getDefaultMessage()}"/>
+                        </th:block>
+                    </div>
+                    <div>
+                        <label for="email">E-mail</label>
+                        <input type="text" class="form-control"
+                               th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('email')} ? 'is-invalid'"
+                               th:field="*{email}" id="email" autocomplete="username">
+                        <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('email')}">
+                            <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('email')}"
+                                 th:text="${error.getDefaultMessage()}"/>
+                        </th:block>
+                    </div>
+                    <div id="password-div">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                               autocomplete="current-password">
+                    </div>
+                    <div>
+                        <label for="roles">Role</label>
+                        <select multiple class="form-control" id="roles" name="roles">
+                            <option th:each="role : ${allRoles}"
+                                    th:selected="*{hasRole('__${role.id}__')}" th:text="${role.name}"
+                                    th:value="${role.id}">
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
+
 
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

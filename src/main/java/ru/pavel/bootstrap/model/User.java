@@ -1,6 +1,7 @@
 package ru.pavel.bootstrap.model;
 
 
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,7 +14,24 @@ import java.util.*;
 
 @Entity
 @Table(name = "users")
-public final class User extends AbstractEntity<Long> implements UserDetails {
+public class User implements UserDetails {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+
+    @Nullable
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(@Nullable Long id) {
+        this.id = id;
+    }
+
+    @Transient
+    public boolean isNew() {
+        return null == getId();
+    }
 
     @Column(name = "name")
     @NotEmpty(message = "Name should not be empty")
