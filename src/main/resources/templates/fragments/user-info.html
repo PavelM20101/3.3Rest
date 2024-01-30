@@ -1,49 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:with="lang=${#locale.language}" th:lang="${lang}">
-<!-- Объявление HTML документа с использованием пространства имен Thymeleaf -->
-
 <head th:replace="layouts/main :: htmlhead"/>
 <!-- Включение содержимого тега head из фрагмента htmlhead -->
-
 <body>
-
 <header th:replace="fragments/header :: header"/>
 <!-- Включение содержимого тега header из фрагмента header -->
-
 <div class="container-fluid d-flex flex-row vh-100 p-0">
-    <!-- Контейнер с гибким расположением элементов и высотой 100% -->
-
     <div th:replace="fragments/navigation :: navigation(currentPage='user')"/>
-    <!-- Включение содержимого навигационного меню из фрагмента navigation с указанием текущей страницы 'user' -->
-
     <div class="flex-grow-1 bg-light p-3">
-        <!-- Дочерний контейнер с растягиваемым элементом -->
-
         <h1>User information-page</h1>
-        <!-- Заголовок страницы -->
-
         <div class="container-fluid">
-            <!-- Дочерний контейнер с гибким расположением элементов -->
-
             <div class="row border">
-                <!-- Строка с границей -->
-
                 <h5 class="m-2">About user</h5>
-                <!-- Подзаголовок "About user" -->
             </div>
-
             <div class="row border bg-white pb-2">
-                <!-- Строка с границей, белый фон и отступ снизу -->
-
                 <table class="table table-borderless m-3">
                     <!-- Таблица без границы с отступом -->
-
                     <thead>
-                    <!-- Заголовок таблицы -->
-
                     <tr class="border-top">
-                        <!-- Строка с верхней границей -->
-
                         <th scope="col">ID</th>
                         <th scope="col">First name</th>
                         <th scope="col">Last name</th>
@@ -53,12 +27,9 @@
                         <!-- Заголовки столбцов таблицы -->
                     </tr>
                     </thead>
-
                     <tbody>
-                    <!-- Тело таблицы -->
-
                     <tr class="border-top bg-light" th:object="${user}">
-                        <!-- Строка таблицы с верхней границей и связанным объектом "user" -->
+                        <!-- Строка таблицы с верхней границей и объектом user -->
 
                         <td th:text="*{id}"/>
                         <td th:text="*{firstName}"/>
@@ -70,24 +41,19 @@
                         <td>
                             <th:block th:each="role : *{getRoles()}">
                                 <!-- Блок с каждой ролью пользователя -->
-
                                 &nbsp;<span th:text="${role.name}"/>
                                 <!-- Отображение имени роли -->
                             </th:block>
                         </td>
                         <!-- Ячейка с ролями пользователя -->
                     </tr>
-
                     </tbody>
                 </table>
-                <!-- Завершение таблицы -->
             </div>
         </div>
     </div>
 </div>
 
 <div th:replace="layouts/main :: footer"/>
-<!-- Включение содержимого тега footer из фрагмента footer -->
-
 </body>
 </html>

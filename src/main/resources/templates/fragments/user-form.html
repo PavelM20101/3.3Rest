@@ -1,60 +1,43 @@
 <div class="modal-content">
-    <!-- Контент модального окна -->
-
     <div class="modal-header">
-        <!-- Заголовок модального окна -->
         <h3 class="modal-title">Delete or edit user</h3>
-        <!-- Заголовок модального окна -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
         <!-- Кнопка закрытия модального окна -->
     </div>
-
     <form role="form" id="userprofile-form" th:action="@{/admin}" th:method="post" th:object="${user}">
-        <!-- Форма с ролью, методом и объектом -->
-
+        <!-- Форма с ролью методом и объектом -->
         <div class="modal-body">
-            <!-- Тело модального окна -->
             <div class="container col-6 text-center">
-                <!-- Контейнер с шириной 6 и центрированием -->
-
+                <!-- Контейнер с шириной 6 -->
                 <div class="form-group text-center">
-                    <!-- Группа форм с выравниванием по центру -->
                     <input id="method" type="hidden" name="_method" value="post">
                     <!-- Скрытое поле для указания метода -->
-
                     <div>
-                        <!-- Поле "ID" -->
+                        <!-- Поле id -->
                         <label for="id">ID</label>
                         <input type="text" class="form-control" th:field="*{id}" id="id" readonly>
-                        <!-- Поле для отображения идентификатора пользователя (только для чтения) -->
+                        <!-- Поле для отображения идентификатора пользователя, только для чтения -->
                     </div>
 
                     <div>
-                        <!-- Поле "First name" -->
+                        <!-- Поле first name -->
                         <label for="firstName">First name</label>
                         <input type="text" class="form-control" th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('firstName')} ? 'is-invalid'"
                                th:field="*{firstName}" id="firstName">
-                        <!-- Поле ввода имени с проверкой на ошибки и отображением сообщений об ошибках -->
+                        <!-- Поле с проверкой на ошибки-->
                         <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('firstName')}">
                             <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('firstName')}" th:text="${error.getDefaultMessage()}"/>
-                            <!-- Отображение сообщений об ошибках, если таковые имеются -->
                         </th:block>
                     </div>
-
-                    <!-- Аналогичные поля для "Last name", "Age", "E-mail", "Password" и "Role" -->
-
                 </div>
             </div>
         </div>
 
         <div class="modal-footer">
-            <!-- Подвал модального окна -->
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <!-- Кнопка закрытия модального окна -->
             <button type="submit" class="btn submit">Save</button>
-            <!-- Кнопка для сохранения изменений -->
         </div>
     </form>
 </div>

@@ -1,21 +1,14 @@
 <div th:fragment="navigation (currentPage)" class="bg-white">
-  <!-- Фрагмент для навигации с переданным параметром currentPage -->
-
   <nav class="btn-group-vertical mt-3 mb-3">
-    <!-- Навигационное меню с вертикальным расположением и отступами -->
-
     <a sec:authorize="hasRole('ADMIN')" type="button" class="btn pl-5 pr-5"
        th:classappend="${currentPage} == 'admin' ? btn-primary : btn-light"
        th:href="@{/admin}">Admin</a>
-    <!-- Ссылка на страницу администратора (только для пользователей с ролью ADMIN).
-         Класс кнопки зависит от значения currentPage: если текущая страница - admin, то применяется класс btn-primary,
-         иначе - btn-light -->
-
+    <!-- Ссылка на страницу администратора только для пользователей с ролью ADMIN
+    Класс кнопки зависит от значения currentPage если текущая страница - admin, то применяется класс btn-primary, иначе - btn-light -->
     <a type="button" class="btn pl-5 pr-5"
        th:classappend="${currentPage} == 'user' ? btn-primary : btn-light"
        th:href="@{/user}">User</a>
-    <!-- Ссылка на страницу пользователя.
-         Класс кнопки зависит от значения currentPage: если текущая страница - user, то применяется класс btn-primary,
-         иначе - btn-light -->
+    <!-- Ссылка на страницу пользователя
+    Класс кнопки зависит от значения currentPage: если текущая страница - user, то применяется класс btn-primary, иначе - btn-light -->
   </nav>
 </div>

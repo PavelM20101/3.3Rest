@@ -1,57 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:with="lang=${#locale.language}" th:lang="${lang}">
-<!-- Объявление типа документа и установка пространств имен для Thymeleaf и Spring Security -->
-
 <head th:replace="layouts/main :: htmlhead"/>
-<!-- Вставка содержимого заголовка из шаблона "htmlhead" -->
-
 <body>
-
 <div class="container">
-    <!-- Контейнер для формы входа -->
-
     <form class="form-signin" th:method="POST" th:action="@{/}">
-        <!-- Форма входа с методом POST и действием на корневой URL -->
-
+        <!-- Форма входа с методом post и действием на корневой URL -->
         <h2 class="form-signin-heading">Please sign in</h2>
-        <!-- Заголовок формы -->
-
         <div th:if="${authenticationName}" class="alert alert-success" role="alert" th:text="|Good bye, ${authenticationName}!"/>
-        <!-- Уведомление об успешном выходе с указанием имени пользователя -->
-
+        <!-- Уведомление об успешном выходе -->
         <div th:if="${authenticationException.getMessage()}" class="alert alert-danger" role="alert" th:text="${authenticationException.getMessage()}"/>
-        <!-- Уведомление об ошибке аутентификации с сообщением об ошибке -->
-
+        <!-- Уведомление об ошибке с сообщением об ошибке -->
         <p>
             <label for="email" class="sr-only">Username</label>
-            <!-- Метка для поля ввода имени пользователя -->
-
             <input type="text" id="email" name="email" class="form-control" placeholder="Email" autocomplete="username" required autofocus>
             <!-- Поле ввода имени пользователя -->
-
         </p>
         <p>
             <label for="password" class="sr-only">Password</label>
-            <!-- Метка для поля ввода пароля -->
-
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" autocomplete="current-password" required>
             <!-- Поле ввода пароля -->
-
         </p>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <!-- Скрытое поле для передачи CSRF токена -->
-
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <!-- Кнопка для отправки формы входа -->
-
         <div class="primary">&nbsp;</div>
         <!-- Дополнительное пространство для вертикального отступа -->
-
     </form>
 </div>
-
 <div th:replace="layouts/main :: footer"></div>
-<!-- Вставка содержимого футера из шаблона "footer" -->
-
 </body>
 </html>

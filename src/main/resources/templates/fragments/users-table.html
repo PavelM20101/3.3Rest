@@ -1,11 +1,7 @@
 <table class="table table-borderless m-3">
-  <!-- Создание таблицы с использованием Bootstrap стилей -->
-
   <thead>
-  <!-- Заголовок таблицы -->
   <tr class="border-top">
     <!-- Строка с верхней границей -->
-
     <th scope="col">ID</th>
     <th scope="col">First name</th>
     <th scope="col">Last name</th>
@@ -17,21 +13,16 @@
     <!-- Заголовки столбцов таблицы -->
   </tr>
   </thead>
-
   <tbody>
-  <!-- Тело таблицы -->
-
   <tr class="border-top bg-light" th:each="user, rowStat : ${users}"
       th:classappend="${rowStat.count % 2 != 0 ? 'table-secondary' : 'table-light'}">
-    <!-- Строка таблицы для каждого пользователя из списка ${users} -->
-
+    <!-- Строка таблицы для каждого пользователя из списка -->
     <td th:text="${user.id}"/>
     <td th:text="${user.firstName}"/>
     <td th:text="${user.lastName}"/>
     <td th:text="${user.age}"/>
     <td th:text="${user.email}"/>
     <!-- Ячейки с данными пользователя -->
-
     <td>
       <!-- Столбец для ролей пользователя -->
       <th:block th:each="role : ${user.getRoles()}">
@@ -40,14 +31,12 @@
         <!-- Отображение имени роли -->
       </th:block>
     </td>
-
     <td>
       <!-- Столбец для редактирования пользователя -->
       <a th:href="@{/admin/{id}/profile(id=${user.id})}"
          class="btn btn-sm btn-info edit-button">Edit</a>
       <!-- Ссылка для редактирования пользователя -->
     </td>
-
     <td>
       <!-- Столбец для удаления пользователя -->
       <a th:href="@{/admin/{id}/profile(id=${user.id})}"

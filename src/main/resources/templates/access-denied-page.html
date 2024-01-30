@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:with="lang=${#locale.language}" th:lang="${lang}">
-<!-- Объявление типа документа и установка пространств имен для Thymeleaf и Spring Security -->
-
 <head th:replace="layouts/main :: htmlhead"/>
 <!-- Вставка содержимого заголовка из шаблона "htmlhead" -->
-
 <body>
-<!-- Открывающий тег для тела документа -->
-
 <header th:replace="fragments/header :: header"/>
 <!-- Вставка содержимого шапки из шаблона "header" -->
-
 <div class="container">
     <h2 class="form-signin-heading">Access denied!</h2>
     <!-- Заголовок "Access denied!" -->
 </div>
-
 <div th:replace="layouts/main :: footer"></div>
-<!-- Вставка содержимого футера из шаблона "footer" -->
-
+<!-- Вставка содержимого футера из шаблона footer -->
 </body>
 </html>
-<!-- Закрывающие теги для тела и документа -->

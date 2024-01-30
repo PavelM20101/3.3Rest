@@ -1,33 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:with="lang=${#locale.language}" th:lang="${lang}">
-<!-- Объявление типа документа и пространств имен для Thymeleaf и Spring Security -->
-
 <head th:replace="layouts/main :: htmlhead"/>
-<!-- Вставка содержимого заголовка из шаблона "htmlhead" -->
-
+<!-- Вставка содержимого заголовка из htmlhead -->
 <body>
-
 <header th:replace="fragments/header :: header"/>
-<!-- Вставка содержимого шапки из шаблона "header" -->
-
+<!-- Вставка содержимого шапки из header -->
 <div class="container-fluid d-flex flex-row vh-100 p-0">
-    <!-- Контейнер с гибкой сеткой, занимающий всю высоту экрана -->
-
+    <!-- Контейнер с сеткой занимающий всю высоту экрана -->
     <div th:replace="fragments/navigation :: navigation(currentPage='admin')"/>
-    <!-- Вставка навигационной панели из шаблона "navigation", currentPage указывает на текущую страницу -->
-
+    <!-- Вставка из шаблона navigation currentPage указывает на текущую страницу -->
     <div class="flex-grow-1 bg-light p-3">
         <!-- Контейнер с фоном светлого цвета и заполнением -->
-
         <h1>Admin panel</h1>
-        <!-- Заголовок "Admin panel" -->
-
         <div class="container-fluid">
-            <!-- Внутренний контейнер с гибкой сеткой -->
-
             <nav>
-                <!-- Навигационная панель -->
                 <div class="nav nav-tabs border-bottom-0" id="nav-tab" role="tablist">
                     <!-- Навигационные вкладки -->
                     <a class="nav-link active" id="nav-users_table-link" data-toggle="tab" href="#nav-users_table"
@@ -38,15 +25,12 @@
                     <!-- Вкладка для добавления нового пользователя -->
                 </div>
             </nav>
-
             <div class="tab-content" id="nav-tabContent">
-                <!-- Контент вкладок -->
                 <div class="tab-pane fade show active" id="nav-users_table" role="tabpanel">
                     <!-- Содержимое вкладки для таблицы пользователей -->
                     <div class="row border">
                         <!-- Ряд с границей -->
                         <h5 class="m-2">All users</h5>
-                        <!-- Заголовок "All users" -->
                     </div>
                     <div class="row border bg-white pb-2">
                         <!-- Ряд с границей и белым фоном с заполнением внизу -->
@@ -54,18 +38,14 @@
                         <!-- Вставка фрагмента с таблицей пользователей -->
                     </div>
                 </div>
-
                 <div class="tab-pane fade" id="nav-user_form" role="tabpanel">
                     <!-- Содержимое вкладки для формы добавления нового пользователя -->
                     <div class="row border">
-                        <!-- Ряд с границей -->
                         <h5 class="m-2">Add new user</h5>
-                        <!-- Заголовок "Add new user" -->
                     </div>
                     <div class="row border bg-white pb-2">
-                        <!-- Ряд с границей и белым фоном с заполнением внизу -->
                         <div th:replace="fragments/user-addform"/>
-                        <!-- Вставка фрагмента с формой добавления нового пользователя -->
+                        <!-- Вставка формы добавления нового пользователя -->
                     </div>
                 </div>
             </div>
@@ -76,55 +56,48 @@
 <div id="user-profile" class="modal fade">
     <!-- Модальное окно для профиля пользователя -->
     <div class="modal-dialog">
-        <!-- Диалог модального окна -->
         <th:block th:if="${showUserProfile}">
             <!-- Проверка условия для отображения профиля пользователя -->
             <div th:replace="fragments/user-form"/>
-            <!-- Вставка фрагмента с формой пользователя -->
+            <!-- Вставка формы пользователя -->
         </th:block>
     </div>
 </div>
 
 <div th:replace="layouts/main :: footer"/>
-<!-- Вставка содержимого футера из шаблона "footer" -->
+<!-- Вставка содержимого футера из footer -->
 
 <script th:inline="javascript">
     $(document).ready(function () {
-        // JavaScript код, выполняемый после загрузки страницы
-
         let userExists = [[${showUserProfile}]];
-        // Переменная для проверки существования пользователя
+        //Переменная для проверки существования пользователя
 
         if (userExists) {
-            // Если пользователь существует
+            //Если пользователь существует
             $('#user-profile .modal-header h3').text('Edit User');
-            // Изменение заголовка модального окна на "Edit User"
+            // Изменение заголовка модального окна на Edit User
             $('#user-profile .modal-footer .submit').addClass('btn-primary');
-            // Добавление класса "btn-primary" для кнопки в модальном окне
             $('#user-profile #method').val("patch");
-            // Установка значения атрибута "method" формы в "patch"
+            //Установка значения атрибута method формы в patch
             $('#user-profile').modal("show");
             // Отображение модального окна
         }
 
         let setNewUserFormTabpanel = [[${showNewUserForm}]];
-        // Переменная для установки активной вкладки для формы нового пользователя
+        // Переменная для установки активной вкладки длянового пользователя
 
         if (setNewUserFormTabpanel) {
-            // Если необходимо установить активную вкладку для формы нового пользователя
+            //Если необходимо установить активную вкладку для формы нового пользователя
             $('#nav-users_table-link').removeClass('active');
-            // Удаление класса "active" для вкладки таблицы пользователей
+            // Удаление класса active для вкладки таблицы пользователей
             $('#nav-users_table').removeClass('show').removeClass('active');
-            // Удаление классов "show" и "active" для содержимого вкладки таблицы пользователей
+            //Удаление классов show и active для содержимого вкладки таблицы пользователей
             $('#nav-user_form-link').addClass('active');
-            // Добавление класса "active" для вкладки формы нового пользователя
+            //Добавление класса active для вкладки формы нового пользователя
             $('#nav-user_form').addClass('show').addClass('active');
-            // Добавление классов "show" и "active" для содержимого вкладки формы нового пользователя
+            // Добавление классов show и active для содержимого вкладки формы нового пользователя
         }
     });
 </script>
-<!-- Встроенный JavaScript код -->
-
 </body>
 </html>
-<!-- Закрывающие теги для тела и документа -->

@@ -1,10 +1,10 @@
-<!DOCTYPE html> <!-- Объявление типа документа -->
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:with="lang=${#locale.language}" th:lang="${lang}">
 <head th:fragment="htmlhead">
     <meta charset="utf-8"> <!-- Установка кодировки документа -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- Настройка масштабирования для мобильных устройств -->
-    <meta name="description" content=""> <!-- Мета-тег для описания -->
-    <meta name="author" content=""> <!-- Мета-тег для автора -->
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"> <!-- Ссылка на файл стилей Bootstrap -->
     <link rel="stylesheet" th:href="@{/css/styles.css}"> <!-- Ссылка на собственный файл стилей с использованием Thymeleaf -->
@@ -20,12 +20,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li> <!-- Ссылка на домашнюю страницу -->
-                <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/admin/new}">Create new user</a></li> <!-- Ссылка для создания нового пользователя (только для администраторов) -->
-                <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/admin}">User list</a></li> <!-- Ссылка на список пользователей (только для администраторов) -->
-                <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/user}">Show profile</a></li> <!-- Ссылка на профиль пользователя (только для авторизованных пользователей) -->
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                <!-- Ссылка на домашнюю страницу -->
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/admin/new}">Create new user</a></li>
+                <!-- Ссылка для создания нового пользователя (только для администраторов) -->
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/admin}">User list</a></li>
+                <!-- Ссылка на список пользователей (только для администраторов) -->
+                <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/user}">Show profile</a></li>
+                <!-- Ссылка на профиль пользователя (только для авторизованных пользователей) -->
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a type="button" th:href="@{/logout}" class="btn btn-outline-light">Logout</a> <!-- Ссылка для выхода из системы (только для авторизованных пользователей) -->
+                    <a type="button" th:href="@{/logout}" class="btn btn-outline-light">Logout</a>
+                    <!-- Ссылка для выхода из системы (только для авторизованных пользователей) -->
                 </li>
             </ul>
         </div>
@@ -35,15 +40,16 @@
 <div class="container">
     <div class="row">
         <div class="col text-center">
-            <a type="button" th:href="@{/admin}" class="btn btn-secondary bg-secondary text-white">Get user list</a> <!-- Кнопка для получения списка пользователей -->
+            <a type="button" th:href="@{/admin}" class="btn btn-secondary bg-secondary text-white">Get user list</a>
+            <!-- Кнопка для получения списка пользователей -->
         </div>
     </div>
 </div>
 
-<th:block th:fragment="footer"> <!-- Фрагмент для подключения скриптов -->
+<th:block th:fragment="footer"> <!-- Подключения скриптов -->
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script> <!-- Подключение jQuery -->
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script> <!-- Подключение Bootstrap JavaScript -->
-    <script th:src="@{/js/its.js}"></script> <!-- Подключение собственного JavaScript-файла с использованием Thymeleaf -->
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script> <!-- Подключение Bootstrap JS -->
+    <script th:src="@{/js/its.js}"></script> <!-- Подключение собственного JS с использованием Thymeleaf -->
 </th:block>
 </body>
 </html>

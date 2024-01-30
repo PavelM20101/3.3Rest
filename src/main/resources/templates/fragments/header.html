@@ -1,24 +1,16 @@
-<header class="container-fluid d-flex flex-row align-items-center justify-content-between p-3 bg-dark text-white">
-  <!-- Заголовок с классами для стилизации (флексбокс, цвет фона, текста и т. д.) -->
-
+<header class="container-fluid d-flex flex-row align-items-center justify-content-between p-3 bg-dark text-white"
+        xmlns:sec="http://www.w3.org/1999/xhtml">
   <div>
-    <!-- Левая часть заголовка -->
     <b sec:authentication="name"/>
     <!-- Отображение имени аутентифицированного пользователя -->
-
     with roles:
-    <!-- Текстовое сообщение "with roles:" -->
-
     <th:block th:each="role : ${#authentication.authorities}">
-      <!-- Блок для перечисления ролей пользователя -->
+      <!-- Блок перечисления ролей пользователя -->
       &nbsp;<span th:text="${role.getName()}"/>
       <!-- Отображение имени роли пользователя -->
     </th:block>
   </div>
-
   <div>
-    <!-- Правая часть заголовка -->
     <a class="text-light" th:href="@{/logout}">Logout</a>
-    <!-- Ссылка для выхода из системы -->
   </div>
 </header>
