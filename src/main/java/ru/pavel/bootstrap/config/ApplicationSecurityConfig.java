@@ -43,14 +43,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()
-                .and()
-                /*.exceptionHandling().accessDeniedHandler(accessDeniedHandler)*/;
+                .and();
         http.formLogin()
-                .loginPage("/") // указываем страницу с формой логина
-                .permitAll()  // даем доступ к форме логина всем
-                .successHandler(successUserHandler) //указываем логику обработки при удачном логине
-                /*.failureHandler(authenticationFailureHandler) //указываем логику обработки при неудачном логине*/
-                .usernameParameter("email") // Указываем параметры логина и пароля с формы логина
+                .loginPage("/")
+                .permitAll()
+                .successHandler(successUserHandler)
+                .usernameParameter("email")
                 .passwordParameter("password");
         http.logout()
                 .logoutUrl("/logout")
@@ -58,7 +56,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/?logout")
-                /*.logoutSuccessHandler(urlLogoutSuccessHandler)*/
                 .permitAll();
     }
 }

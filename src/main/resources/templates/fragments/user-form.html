@@ -24,11 +24,13 @@
                     <div>
                         <!-- Поле first name -->
                         <label for="firstName">First name</label>
-                        <input type="text" class="form-control" th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('firstName')} ? 'is-invalid'"
+                        <input type="text" class="form-control"
+                               th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('firstName')} ? 'is-invalid'"
                                th:field="*{firstName}" id="firstName">
                         <!-- Поле с проверкой на ошибки-->
                         <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('firstName')}">
-                            <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('firstName')}" th:text="${error.getDefaultMessage()}"/>
+                            <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('firstName')}"
+                                 th:text="${error.getDefaultMessage()}"/>
                         </th:block>
                     </div>
                 </div>
