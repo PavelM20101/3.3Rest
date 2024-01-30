@@ -116,4 +116,25 @@ public class UserServiceImpl implements UserService{
         redirectAttributes.addFlashAttribute("user", user);
         redirectAttributes.addFlashAttribute("bindingResult", bindingResult);
     }
+    public void authenticateOrLogout(Model model, HttpSession session, LoginException authenticationException, String authenticationName) {
+        if (authenticationException != null) {
+            try {
+                model.addAttribute("authenticationException", authenticationException);
+                session.removeAttribute("Authentication-Exception");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            model.addAttribute("authenticationException", new LoginException(null));
+        }
+
+        if (authenticationName != null) {
+            try {
+                model.addAttribute("authenticationName", authenticationName);
+                session.removeAttribute("Authentication-Name");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

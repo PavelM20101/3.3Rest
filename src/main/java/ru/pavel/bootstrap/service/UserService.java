@@ -18,5 +18,5 @@ public interface UserService extends UserDetailsService {
     User findUser(Long userId);
     List<User> findAllUsers();
     UserDetails loadUserByUsername(String email);
-
+    void authenticateOrLogout(Model model, HttpSession session, LoginException authenticationException, String authenticationName);
 }

@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import ru.pavel.bootstrap.config.exception.LoginException;
-import ru.pavel.bootstrap.service.AppService;
+import ru.pavel.bootstrap.service.UserService;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("")
 public class IndexController {
-	private final AppService appService;
+	private final UserService appService;
 
 	@Autowired
-	public IndexController(AppService appService) {
+	public IndexController(UserService appService) {
 		this.appService = appService;
 	}
 

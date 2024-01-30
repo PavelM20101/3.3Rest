@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.pavel.bootstrap.config.handler.SuccessUserHandler;
-import ru.pavel.bootstrap.service.AppService;
 import ru.pavel.bootstrap.service.UserService;
 
 @Configuration
