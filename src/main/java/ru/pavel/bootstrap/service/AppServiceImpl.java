@@ -1,4 +1,4 @@
-package ru.itsinfo.springbootsecurityusersbootstrap.service;
+package ru.pavel.bootstrap.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,13 +12,12 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.itsinfo.springbootsecurityusersbootstrap.config.exception.LoginException;
-import ru.itsinfo.springbootsecurityusersbootstrap.model.Role;
-import ru.itsinfo.springbootsecurityusersbootstrap.model.User;
-import ru.itsinfo.springbootsecurityusersbootstrap.repository.RoleRepository;
-import ru.itsinfo.springbootsecurityusersbootstrap.repository.UserRepository;
+import ru.pavel.bootstrap.config.exception.LoginException;
+import ru.pavel.bootstrap.model.Role;
+import ru.pavel.bootstrap.model.User;
+import ru.pavel.bootstrap.repository.RoleRepository;
+import ru.pavel.bootstrap.repository.UserRepository;
 
-import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package ru.itsinfo.springbootsecurityusersbootstrap.service;
+package ru.pavel.bootstrap.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.itsinfo.springbootsecurityusersbootstrap.config.exception.LoginException;
-import ru.itsinfo.springbootsecurityusersbootstrap.model.Role;
-import ru.itsinfo.springbootsecurityusersbootstrap.model.User;
+import ru.pavel.bootstrap.config.exception.LoginException;
+import ru.pavel.bootstrap.model.Role;
+import ru.pavel.bootstrap.model.User;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;

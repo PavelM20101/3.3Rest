@@ -1,4 +1,4 @@
-package ru.itsinfo.springbootsecurityusersbootstrap.model;
+package ru.pavel.bootstrap.model;
 
 
 import org.springframework.security.core.GrantedAuthority;

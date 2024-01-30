@@ -1,8 +1,8 @@
-package ru.itsinfo.springbootsecurityusersbootstrap.repository;
+package ru.pavel.bootstrap.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.itsinfo.springbootsecurityusersbootstrap.model.User;
+import ru.pavel.bootstrap.model.User;
 
 import java.util.Optional;
 

@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:with="lang=${#locale.language}" th:lang="${lang}">
 <head th:replace="layouts/main :: htmlhead"/>
-<!-- Вставка содержимого заголовка из htmlhead -->
+<!-- Вставка содержимого htmlhead -->
 <body>
 <header th:replace="fragments/header :: header"/>
-<!-- Вставка содержимого шапки из header -->
+<!-- Вставка содержимого header -->
 <div class="container-fluid d-flex flex-row vh-100 p-0">
     <!-- Контейнер с сеткой занимающий всю высоту экрана -->
     <div th:replace="fragments/navigation :: navigation(currentPage='admin')"/>

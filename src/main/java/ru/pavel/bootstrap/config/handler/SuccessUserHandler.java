@@ -1,4 +1,4 @@
-package ru.itsinfo.springbootsecurityusersbootstrap.config.handler;
+package ru.pavel.bootstrap.config.handler;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;

@@ -1,4 +1,4 @@
-package ru.itsinfo.springbootsecurityusersbootstrap.config.exception;
+package ru.pavel.bootstrap.config.exception;
 
 import java.io.Serializable;
 
