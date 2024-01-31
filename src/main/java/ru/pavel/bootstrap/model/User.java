@@ -128,6 +128,14 @@ public class User implements UserDetails {
         return findRole.isPresent();
     }
 
+    public boolean hasRole(String roleName) {
+        if (null == roles || 0 == roles.size()) {
+            return false;
+        }
+        Optional<Role> findRole = roles.stream().filter(role -> roleName.equals(role.getName())).findFirst();
+        return findRole.isPresent();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

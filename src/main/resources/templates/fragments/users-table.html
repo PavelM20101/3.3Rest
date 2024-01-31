@@ -1,48 +1,15 @@
 <table class="table table-borderless m-3">
-    <thead>
-    <tr class="border-top">
-        <!-- Строка с верхней границей -->
-        <th scope="col">ID</th>
-        <th scope="col">First name</th>
-        <th scope="col">Last name</th>
-        <th scope="col">Age</th>
-        <th scope="col">E-mail</th>
-        <th scope="col">Roles</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
-        <!-- Заголовки столбцов таблицы -->
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="border-top bg-light" th:each="user, rowStat : ${users}"
-        th:classappend="${rowStat.count % 2 != 0 ? 'table-secondary' : 'table-light'}">
-        <!-- Строка таблицы для каждого пользователя из списка -->
-        <td th:text="${user.id}"/>
-        <td th:text="${user.firstName}"/>
-        <td th:text="${user.lastName}"/>
-        <td th:text="${user.age}"/>
-        <td th:text="${user.email}"/>
-        <!-- Ячейки с данными пользователя -->
-        <td>
-            <!-- Столбец для ролей пользователя -->
-            <th:block th:each="role : ${user.getRoles()}">
-                <!-- Для каждой роли пользователя -->
-                &nbsp;<span th:text="${role.name}"/>
-                <!-- Отображение имени роли -->
-            </th:block>
-        </td>
-        <td>
-            <!-- Столбец для редактирования пользователя -->
-            <a th:href="@{/admin/{id}/profile(id=${user.id})}"
-               class="btn btn-sm btn-info edit-button">Edit</a>
-            <!-- Ссылка для редактирования пользователя -->
-        </td>
-        <td>
-            <!-- Столбец для удаления пользователя -->
-            <a th:href="@{/admin/{id}/profile(id=${user.id})}"
-               class="btn btn-sm btn-danger delete-button">Delete</a>
-            <!-- Ссылка для удаления пользователя -->
-        </td>
-    </tr>
-    </tbody>
+  <thead>
+  <tr class="border-top">
+    <th scope="col">ID</th>
+    <th scope="col">First name</th>
+    <th scope="col">Last name</th>
+    <th scope="col">Age</th>
+    <th scope="col">E-mail</th>
+    <th scope="col">Roles</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+  </tr>
+  </thead>
+  <tbody id="users-table-rows"/>
 </table>

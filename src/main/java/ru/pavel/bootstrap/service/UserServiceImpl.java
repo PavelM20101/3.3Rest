@@ -3,6 +3,8 @@ package ru.pavel.bootstrap.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,13 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.pavel.bootstrap.config.exception.LoginException;
 import ru.pavel.bootstrap.model.User;
 import ru.pavel.bootstrap.repository.UserRepository;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -42,41 +43,40 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public void updateUser(User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public User updateUser(User user, BindingResult bindingResult) {
         bindingResult = checkBindingResultForPasswordField(bindingResult);
         if (!bindingResult.hasErrors()) {
-            String oldPassword = user.getPassword();
+            user.setPassword(user.getPassword().isEmpty() ? findUser(user.getId()).getPassword() : passwordEncoder.encode(user.getPassword()));
             try {
-                user.setPassword(user.getPassword().isEmpty() ?
-                        findUser(user.getId()).getPassword() :
-                        passwordEncoder.encode(user.getPassword()));
                 userRepository.save(user);
-            } catch (DataIntegrityViolationException e) {
+            } catch (DataIntegrityViolationException e){
+                String oldPassword = user.getPassword();
                 user.setPassword(oldPassword);
-                addErrorIfDataIntegrityViolationException(bindingResult);
-                addRedirectAttributesIfErrorsExists(user, bindingResult, redirectAttributes);
             }
         } else {
-            addRedirectAttributesIfErrorsExists(user, bindingResult, redirectAttributes);
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
+        return user;
     }
-
     @Override
     @Transactional
-    public void insertUser(User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (!bindingResult.hasErrors()) {
-            String oldPassword = user.getPassword();
+    public User insertUser(User user, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()){
             try {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
-                userRepository.save(user);
-            } catch (DataIntegrityViolationException e) {
+                user = userRepository.save(user);
+            } catch (DataIntegrityViolationException e){
+                String oldPassword = user.getPassword();
                 user.setPassword(oldPassword);
-                addErrorIfDataIntegrityViolationException(bindingResult);
-                addRedirectAttributesIfErrorsExists(user, bindingResult, redirectAttributes);
+                throw e;
             }
-        } else {
-            addRedirectAttributesIfErrorsExists(user, bindingResult, redirectAttributes);
+
         }
+        return user;
     }
 
     @Override
@@ -112,33 +112,31 @@ public class UserServiceImpl implements UserService{
 
         return newBindingResult;
     }
-    private void addErrorIfDataIntegrityViolationException(BindingResult bindingResult) {
-        bindingResult.addError(new FieldError(bindingResult.getObjectName(),
-                "email", "E-mail must be unique"));
-    }
-    private void addRedirectAttributesIfErrorsExists(User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("user", user);
-        redirectAttributes.addFlashAttribute("bindingResult", bindingResult);
-    }
-    public void authenticateOrLogout(Model model, HttpSession session, LoginException authenticationException, String authenticationName) {
-        if (authenticationException != null) {
-            try {
-                model.addAttribute("authenticationException", authenticationException);
-                session.removeAttribute("Authentication-Exception");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            model.addAttribute("authenticationException", new LoginException(null));
+
+    @Override
+    public String getPage(Model model, HttpSession session, @Nullable Authentication auth) {
+        if (Objects.isNull(auth)) {
+            model.addAttribute("authenticatedName", session.getAttribute("authenticatedName"));
+            session.removeAttribute("authenticatedName");
+
+            model.addAttribute("authenticationException", session.getAttribute("authenticationException"));
+            session.removeAttribute("authenticationException");
+
+            return "login-page";
         }
 
-        if (authenticationName != null) {
-            try {
-                model.addAttribute("authenticationName", authenticationName);
-                session.removeAttribute("Authentication-Name");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        User user = (User) auth.getPrincipal();
+        model.addAttribute("user", user);
+
+        if (user.hasRole("ROLE_ADMIN")) {
+            return "main-page";
         }
+
+        if (user.hasRole("ROLE_USER")) {
+            return "user-page";
+        }
+
+        return "access-denied-page";
+
     }
 }
