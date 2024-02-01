@@ -7,7 +7,7 @@
 <div class="container">
     <form class="form-signin" th:method="POST" th:action="@{/login}">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <div th:if="${authenticatedName}" class="alert alert-success" role="alert" th:text="|Good bye, ${authenticatedName}!|"/>
+        <div th:if="${authenticatedName}" class="alert alert-success" role="alert" th:text="${authenticatedName}!"/>
         <div th:if="${authenticationException}" class="alert alert-danger" role="alert" th:text="${authenticationException}"/>
         <p>
             <label for="username" class="sr-only">Username</label>
@@ -19,12 +19,6 @@
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <div class="primary">&nbsp;</div>
-        <div class="alert alert-info" role="alert">
-            <p><b>Using</b><br/>
-            admin@mail.com : admin<br/></p>
-            <p><b>or</b><br/>
-            user@mail.com : user<br/></p>
-        </div>
     </form>
 </div>
 

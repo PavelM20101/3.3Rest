@@ -3,15 +3,16 @@ const userFormId = $('#user-profile');
 const userAddFormId = $('#user-addform');
 
 $('#nav-users_table-link').click(() => {
-    loadUsersTable();
+    loadUsersTable(); // Таблица пользователей
 });
 $('#nav-user_form-link').click(() => {
-    loadAddForm();
+    loadAddForm(); // Форма для добавления пользователя
 });
 userAddFormId.find(':submit').click(() => {
-    insertUser();
+    insertUser(); //Вставка пользователя
 });
 
+//Ф-ция загрузки таблицы пользователей
 function loadUsersTable() {
     $('#nav-users_table-link').addClass('active');
     $('#nav-users_table').addClass('show').addClass('active');
@@ -20,13 +21,16 @@ function loadUsersTable() {
     getAllUsers();
 }
 
+// Навигация
 function initNavigation() {
+    // Обработчик вкладки Администратор
     $('#admin-area-tab').click(() => {
         $('#admin-area-tab').addClass('active').removeClass('btn-light').addClass('btn-primary').prop('aria-selected', true);
         $('#admin-area').addClass('active');
         $('#user-area-tab').removeClass('active').removeClass('btn-primary').addClass('btn-light').prop('aria-selected', false);
         $('#user-area').removeClass('active');
     });
+    // Обработчик вкладки Пользователь
     $('#user-area-tab').click(() => {
         $('#user-area-tab').addClass('active').removeClass('btn-light').addClass('btn-primary').prop('aria-selected', true);
         $('#user-area').addClass('active');
@@ -35,6 +39,7 @@ function initNavigation() {
     });
 }
 
+// Функция загрузки формы добавления пользователя
 function loadAddForm() {
     $('#nav-user_form-link').addClass('active');
     $('#nav-user_form').addClass('show').addClass('active');
@@ -43,6 +48,7 @@ function loadAddForm() {
     loadUserForInsertForm();
 }
 
+// Получение всех пользователей через API
 function getAllUsers() {
     fetch('/api/users').then(function (response) {
         if (response.ok) {
@@ -58,6 +64,7 @@ function getAllUsers() {
     });
 }
 
+// Вставка строки пользователя в таблицу
 function _appendUserRow(user) {
     usersTableId
         .append($('<tr class="border-top bg-light">').attr('id', 'userRow[' + user.id + ']')
@@ -78,6 +85,7 @@ function _appendUserRow(user) {
         );
 }
 
+// Очистка формы редактирования пользователя
 function _eraseUserModalForm() {
     userFormId.find('.invalid-feedback').remove();
     userFormId.find('#firstName').removeClass('is-invalid');
@@ -86,6 +94,7 @@ function _eraseUserModalForm() {
     userFormId.find('#age').removeClass('is-invalid');
 }
 
+// Установка атрибута "readonly" для формы редактирования пользователя
 function _setReadonlyAttr(value = true) {
     userFormId.find('#firstName').prop('readonly', value);
     userFormId.find('#lastName').prop('readonly', value);
@@ -95,6 +104,7 @@ function _setReadonlyAttr(value = true) {
     userFormId.find('#roles').prop('disabled', value);
 }
 
+// Обновление информации о пользователе
 function updateUser(id) {
     _eraseUserModalForm();
 
@@ -158,6 +168,7 @@ function updateUser(id) {
         });
 }
 
+// Загрузка пользователя и отображение модальной формы
 function loadUserAndShowModalForm(id, editMode = true) {
     _eraseUserModalForm();
 
@@ -219,6 +230,7 @@ function loadUserAndShowModalForm(id, editMode = true) {
         });
 }
 
+// Очистка формы добавления пользователя
 function _eraseUserAddForm() {
     userAddFormId.find('.invalid-feedback').remove();
     userAddFormId.find('#newfirstName').removeClass('is-invalid');
@@ -227,6 +239,7 @@ function _eraseUserAddForm() {
     userAddFormId.find('#newpassword').removeClass('is-invalid');
 }
 
+// Загрузка данных для формы добавления пользователя
 function loadUserForInsertForm() {
     _eraseUserAddForm();
     userAddFormId.find('#newfirstName').val('');
@@ -250,6 +263,7 @@ function loadUserForInsertForm() {
     });
 }
 
+// Добавление нового пользователя
 function insertUser() {
     _eraseUserAddForm();
 
@@ -297,6 +311,7 @@ function insertUser() {
         });
 }
 
+// Удаление пользователя
 function deleteUser(id) {
     fetch('/api/users/' + id, {method: 'DELETE'})
         .then(function (response) {
@@ -310,6 +325,7 @@ function deleteUser(id) {
         });
 }
 
+// Инициализация при загрузке документа
 $(document).ready(
     () => {
         getAllUsers();
