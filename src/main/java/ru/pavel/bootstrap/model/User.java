@@ -19,20 +19,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Nullable
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(@Nullable Long id) {
-        this.id = id;
-    }
-
-    @Transient
-    public boolean isNew() {
-        return null == getId();
-    }
-
     @Column(name = "name")
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 to 30")
@@ -68,6 +54,19 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    @Nullable
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(@Nullable Long id) {
+        this.id = id;
+    }
+
+    @Transient
+    public boolean isNew() {
+        return null == getId();
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -82,10 +81,6 @@ public class User implements UserDetails {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getFullName() {
-        return firstName + " " + lastName;
     }
 
     public String getEmail() {
