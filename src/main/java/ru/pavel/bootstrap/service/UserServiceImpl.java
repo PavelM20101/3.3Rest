@@ -115,28 +115,34 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String getPage(Model model, HttpSession session, @Nullable Authentication auth) {
+        // Проверка, аутентифицирован ли пользователь
         if (Objects.isNull(auth)) {
+            // Если пользователь не аутентифицирован
+            // Извлечение атрибутов из сессии и добавление их в модель
             model.addAttribute("authenticatedName", session.getAttribute("authenticatedName"));
             session.removeAttribute("authenticatedName");
-
             model.addAttribute("authenticationException", session.getAttribute("authenticationException"));
             session.removeAttribute("authenticationException");
-
+            // Возврат имени представления для страницы входа в систему
             return "login-page";
         }
-
+        // Извлечение объекта пользователя из аутентификации
         User user = (User) auth.getPrincipal();
+        // Добавление пользователя в модель
         model.addAttribute("user", user);
-
+        // Проверка роли пользователя
+        // Если пользователь - администратор
         if (user.hasRole("ROLE_ADMIN")) {
+            // Возврат имени представления для главной страницы администратора
             return "main-page";
         }
-
+        // Если пользователь - обычный пользователь
         if (user.hasRole("ROLE_USER")) {
+            // Возврат имени представления для страницы обычного пользователя
             return "user-page";
         }
-
+        // Если у пользователя нет указанных ролей
+        // Возврат имени представления для страницы с сообщением об отказе в доступе
         return "access-denied-page";
-
     }
 }

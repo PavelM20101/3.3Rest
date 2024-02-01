@@ -13,16 +13,16 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ApplicationController {
 
-    private final UserService appService;
+    private final UserService userService;
 
     @Autowired
-    public ApplicationController(UserService appService) {
-        this.appService = appService;
+    public ApplicationController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping({"", "/"})
     public String main(Model model, HttpSession session, @Nullable Authentication auth) {
-        return appService.getPage(model, session, auth);
+        return userService.getPage(model, session, auth);
     }
 
     @GetMapping("/access-denied")

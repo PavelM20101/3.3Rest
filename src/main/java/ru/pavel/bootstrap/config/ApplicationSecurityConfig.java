@@ -18,7 +18,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
 
-    // класс, в котором описана логика перенаправления пользователей по ролям
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Autowired
