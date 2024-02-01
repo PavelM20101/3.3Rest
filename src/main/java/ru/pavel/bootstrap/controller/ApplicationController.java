@@ -21,7 +21,7 @@ public class ApplicationController {
     }
 
     @GetMapping({"", "/"})
-    public String main(Model model, HttpSession session, @Nullable Authentication auth) {
+    public String log(Model model, HttpSession session, @Nullable Authentication auth) {
         return userService.getPage(model, session, auth);
     }
 
